@@ -29,7 +29,7 @@ class ToyModel(nn.Module):
 model = ToyModel().to(device)
 
 # defining the loss function and optimiser
-loss_fn = nn.BCELoss() # binary cross entropy loss
+loss_fn = nn.MSELoss()
 optimiser = optim.SGD(model.parameters(), lr=0.01)
 
 def train_one_epoch(model, train_loader, val_loader, optimiser, loss_fn):

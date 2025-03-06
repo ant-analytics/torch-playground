@@ -30,15 +30,11 @@ for file in file_list:
     else:
         combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-# end measure time
-end = time.time()
-print(f'Execution time: {end - start} seconds')
 
 # explore data
 describe(combined_df, stats=['nobs', 'min', 'mean', 'max', 'percentiles'], percentiles=[5, 25, 75, 99]).T
 
-# plot the distribution of the target variable
-num_features = combined_df.shape[1] - 1  # assuming the last column is the target variable
+# plot the distribution of the deatures variables
 num_cols = 5  # number of columns in the subplot grid
 num_rows = (num_features + num_cols - 1) // num_cols  # calculate the number of rows needed
 
@@ -57,3 +53,26 @@ for j in range(i + 1, len(axes)):
 
 plt.tight_layout()
 plt.show()
+
+# plot target variable vs features variables
+target_name = combined_df.columns[-1]
+target = combined_df[target_name]
+
+fig, axes = plt.subplots(num_rows, num_cols, figsize=(20, num_rows * 4))
+axes = axes.flatten()
+for i in range(num_features):
+    ax = axes[i]
+    feature_name = combined_df.columns[i]
+    ax.scatter(combined_df[feature_name], target, alpha=0.5)
+    ax.set_title(f'{feature_name} vs {target_name}')
+
+# Remove any empty subplots
+for j in range(i + 1, len(axes)):
+    fig.delaxes(axes[j])
+
+plt.tight_layout()
+plt.show()
+
+# end measure time
+end = time.time()
+print(f'Execution time: {end - start} seconds')
