@@ -4,9 +4,6 @@ import torch
 import numpy as np
 from torch.utils.data import Dataset, DataLoader, random_split
 
-# start time measurement
-start = time.time()
-
 # with open(file_path, 'r') as f:
 #     header = f.readline().strip().split(',')
 #     features = header[:-1]
@@ -55,11 +52,21 @@ def split_data(folder_path, train_ratio=0.7, val_ratio=0.15, batch_size=100):
         train_dataset, val_dataset, test_dataset
         each set is a tuple return by __getitem__ method of the CustomDataset class
     """
+    # ensure the ratios sum to 1
+    assert train_ratio + val_ratio <= 1, 'train_ratio + val_ratio must be less than or equal to 1'
+
+    # create a dataset object
     base_dataset = CustomDataset(folder_path)
+
+    # calculate the size of each set
     train_size = int(train_ratio * len(base_dataset))
     val_size = int(val_ratio * len(base_dataset))
     test_size = len(base_dataset) - train_size - val_size
+
+    # split the dataset
     train_dataset, val_dataset, test_dataset = random_split(base_dataset, [train_size, val_size, test_size])
+
+    # create a dataloader
     train_loader = DataLoader(train_dataset, batch_size=100, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=100, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=100, shuffle=True)
@@ -76,7 +83,3 @@ train_loader, val_loader, test_loader = split_data(folder_path='data')
 #     print(f'Batch {i}:\nX: {X.shape}\ny: {y.shape}\n')
 #     if i == 2:
 #         break
-
-# end time measurement
-end = time.time()
-print(f'Execution time: {end - start} seconds')
