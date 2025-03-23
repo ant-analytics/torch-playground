@@ -1,4 +1,4 @@
-# torch-playground
+# PyTorch-Playground
 Playground for implementing and testing various deep learning models using PyTorch.
 
 Jupyter Notebook for tensor can be accessed from [notebooks/1.0-ant-tensor.ipynb](notebooks/1.0-ant-tensor.ipynb)
@@ -16,6 +16,8 @@ The codes for custom dataset class can be accessed from: [scripts/custom_dataset
 For Dashboard visualization: [dash_board.py](dash_board.py)
 
 Entry point for the whole project is [main.py](main.py)
+
+Run tensorboard with: `tensorboard --logdir=runs`
 
 <!-- Installation -->
 For pip use: `pip install -r requirements.txt`
