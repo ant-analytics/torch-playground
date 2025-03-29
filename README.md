@@ -9,6 +9,8 @@ Exploratory Data Analysis (EDA) for loan dataset can be accessed from: [notebook
 
 For neural network with PyTorch can be accessed from: [notebooks/4.0-torch_model.ipynb](notebooks/4.0-torch_model.ipynb)
 
+For classical linear regression can be accessed from: [notebooks/5.0-ant-classical-model-linear.ipynb](notebooks/5.0-ant-classical-model-linear.ipynb)
+
 The codes to auto-generate sets of dataset files can be accessed from: [scripts/generate_dataset.py](scripts/generate_dataset.py)
 
 The codes for custom dataset class can be accessed from: [scripts/custom_dataset.py](scripts/custom_dataset.py)
